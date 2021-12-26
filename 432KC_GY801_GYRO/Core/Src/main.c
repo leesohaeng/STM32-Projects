@@ -27,6 +27,7 @@
 #include "ADXL345.h"       // Acc Module include
 #include "HMC5883L.h"      // Compass Module include
 #include "BMP180.h"        // Barometer Module include
+// code upload Github
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
