@@ -1,0 +1,4 @@
+L3G4200D.c:11:7:GY_801_Start	8	static
+L3G4200D.c:19:6:Init_L3G4200D	24	static
+L3G4200D.c:41:9:L3G4200D_WhoAmI	24	static
+L3G4200D.c:49:6:L3G4200D_Read	40	static
