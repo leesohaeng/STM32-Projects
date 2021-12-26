@@ -1,0 +1,77 @@
+/*
+ * L3G4200D.h
+ *
+ *  Created on: Dec 12, 2021
+ *      Author: sohae
+ */
+
+#include "stm32l4xx_hal.h"
+
+extern I2C_HandleTypeDef hi2c1;
+
+#ifndef SRC_L3G4200D_H_
+#define SRC_L3G4200D_H_
+
+#define     L3G4200D		0x69<<1
+#define 	WHO_AM_I 		0x69<<1
+
+enum L3G4200D_regAddr
+{
+	L3G4200D_WHOAMI         = 0x0F,
+
+	L3G4200D_CTRL1          = 0x20, // D20H
+	L3G4200D_CTRL_REG1       = 0x20, // D20, 4200D
+	L3G4200D_CTRL2          = 0x21, // D20H
+	L3G4200D_CTRL_REG2      = 0x21, // D20, 4200D
+	L3G4200D_CTRL3          = 0x22, // D20H
+	L3G4200D_CTRL_REG3      = 0x22, // D20, 4200D
+	L3G4200D_CTRL4          = 0x23, // D20H
+	L3G4200D_CTRL_REG4      = 0x23, // D20, 4200D
+	L3G4200D_CTRL5          = 0x24, // D20H
+	L3G4200D_CTRL_REG5      = 0x24, // D20, 4200D
+	L3G4200D_REFERENCE      = 0x25,
+	L3G4200D_OUT_TEMP       = 0x26,
+	L3G4200D_STATUS         = 0x27, // D20H
+	L3G4200D_STATUS_REG     = 0x27, // D20, 4200D
+
+	L3G4200D_OUT_X_L        = 0x28,
+	L3G4200D_OUT_X_H        = 0x29,
+	L3G4200D_OUT_Y_L        = 0x2A,
+	L3G4200D_OUT_Y_H        = 0x2B,
+	L3G4200D_OUT_Z_L        = 0x2C,
+	L3G4200D_OUT_Z_H        = 0x2D,
+
+	L3G4200D_FIFO_CTRL      = 0x2E, // D20H
+	L3G4200D_FIFO_CTRL_REG  = 0x2E, // D20, 4200D
+	L3G4200D_FIFO_SRC       = 0x2F, // D20H
+	L3G4200D_FIFO_SRC_REG   = 0x2F, // D20, 4200D
+
+	L3G4200D_IG_CFG         = 0x30, // D20H
+	L3G4200D_INT1_CFG       = 0x30, // D20, 4200D
+	L3G4200D_IG_SRC         = 0x31, // D20H
+	L3G4200D_INT1_SRC       = 0x31, // D20, 4200D
+	L3G4200D_IG_THS_XH      = 0x32, // D20H
+	L3G4200D_INT1_THS_XH    = 0x32, // D20, 4200D
+	L3G4200D_IG_THS_XL      = 0x33, // D20H
+	L3G4200D_INT1_THS_XL    = 0x33, // D20, 4200D
+	L3G4200D_IG_THS_YH      = 0x34, // D20H
+	L3G4200D_INT1_THS_YH    = 0x34, // D20, 4200D
+	L3G4200D_IG_THS_YL      = 0x35, // D20H
+	L3G4200D_INT1_THS_YL    = 0x35, // D20, 4200D
+	L3G4200D_IG_THS_ZH      = 0x36, // D20H
+	L3G4200D_INT1_THS_ZH    = 0x36, // D20, 4200D
+	L3G4200D_IG_THS_ZL      = 0x37, // D20H
+	L3G4200D_INT1_THS_ZL    = 0x37, // D20, 4200D
+	L3G4200D_IG_DURATION    = 0x38, // D20H
+	L3G4200D_INT1_DURATION  = 0x38, // D20, 4200D
+
+	L3G4200D_LOW_ODR        = 0x39  // D20H
+};
+
+void 	GY_801_Start();
+void	Init_L3G4200D();
+uint8_t	L3G4200D_WhoAmI();
+void	L3G4200D_Read(GYRODATA *G);
+
+// Slava address        110100xx     xx:11 10 01 00
+#endif /* SRC_L3G4200D_H_ */
