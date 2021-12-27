@@ -30,7 +30,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  ../Core/Inc/L3G4200D.h ../Core/Inc/ADXL345.h ../Core/Inc/HMC5883L.h \
- ../Core/Inc/BMP180.h
+ ../Core/Inc/BMP180.h ../Core/Inc/Kalman.h
 
 ../Core/Inc/main.h:
 
@@ -101,3 +101,5 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/HMC5883L.h:
 
 ../Core/Inc/BMP180.h:
+
+../Core/Inc/Kalman.h:

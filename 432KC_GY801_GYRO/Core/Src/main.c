@@ -27,7 +27,7 @@
 #include "ADXL345.h"       // Acc Module include
 #include "HMC5883L.h"      // Compass Module include
 #include "BMP180.h"        // Barometer Module include
-// code upload Github
+#include "Kalman.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,7 +53,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 volatile bool GyroData=false;
-
+extern   float InData[9],OutData[9];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -129,20 +129,13 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-
-  if(HMC5883L_WhoAmI()==1)
-  {
-	  printf("HMC5883L OK\r\n");
-  }
-  else
-  {
-	  printf("HMC5883L Fail\r\n");
-  }
-
   if(Init_BMP180_Calib_Param(&B)==HAL_OK)
   {
-	  printf("%7d%7d%7d%7d%7d%7d\r\n",B.AC1,B.AC2,B.AC3,B.AC4,B.AC5,B.AC6);
+	  // printf("%7d%7d%7d%7d%7d%7d\r\n",B.AC1,B.AC2,B.AC3,B.AC4,B.AC5,B.AC6);
   }
+
+  // 칼만필터 초기화.
+  kalman_var_init();
 
   while (1)
   {
@@ -150,14 +143,35 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  if(GyroData==true) {
+		  //float	temp;
+		  //int32_t press;
+		  //float altitude;
 
-//		  L3G4200D_Read(&G);
-//		  ADXL345_Read(&A);
+		  L3G4200D_Read(&G);
+		  ADXL345_Read(&A);
+		  HMC5883L_Read(&C);
 
-//		  printf("%7d%7d%7d\r\n",A.x,A.y,A.z);
-//		  printf("%7d%7d%7d%7d%7d%7d",G.x,G.y,G.z,A.x,A.y,A.z);
-//		  printf(",%7.2f\r\n",HMC5883L_Read());
-		  printf("%10.4f\r\n",BMP180_GetTempC());
+		  InData[0] = G.x;
+		  InData[1] = G.y;
+		  InData[2] = G.z;
+		  InData[3] = A.x;
+		  InData[4] = A.y;
+		  InData[5] = A.z;
+		  InData[6] = C.x;
+		  InData[7] = C.y;
+		  InData[8] = C.z;
+
+		  kalman_filter();
+
+//		  for(int i=6;i<9;i++) printf("%10.3f",OutData[i]);
+		  printf("%10.3f%10.3f\r\n",InData[1],OutData[1]);
+
+		 // printf(",%7.2f - ",HMC5883L_Read());
+
+		  //temp = BMP180_GetTempC();
+		  //press = BMP180_GetPressure();
+		  //altitude = BMP180_GetAltitude(press);
+		  // printf("%10.4f : %10d : %10.4f\r\n",temp,press,altitude);
 		  GyroData=false;
 	  }
 

@@ -50,7 +50,7 @@ uint8_t	HMC5883L_WhoAmI()
 	  else return 0;
 }
 
-double	HMC5883L_Read()
+double	HMC5883L_Read(COMDATA *C)
 {
 	  uint8_t am;
 	  uint8_t rdata[6]={0,0,0,0,0,0};
@@ -62,14 +62,13 @@ double	HMC5883L_Read()
 	  while(HAL_I2C_Master_Receive (&hi2c1,(uint16_t)HMC5883L,(uint8_t *)rdata,6,1000)!=HAL_OK);
 
 	  X = (int16_t)(rdata[0]<<8 | rdata[1]);
-	  x = ((float)X - Xoffset) * scale;
+	  C->x = ((float)X - Xoffset) * scale;
 	  Y = (int16_t)(rdata[2]<<8 | rdata[3]);
-	  y = ((float)Y - Yoffset) * scale;
+	  C->y = ((float)Y - Yoffset) * scale;
 	  Z = (int16_t)(rdata[4]<<8 | rdata[5]);
-	  z = ((float)Z - Zoffset) * scale;
+	  C->z = ((float)Z - Zoffset) * scale;
 
-	  bearing = atan2(x,y) + angle_offset;
-	  printf(": %5d %5d %5d",X,Y,Z);
+	  bearing = atan2(C->x,C->y) + angle_offset;
 /*
 	  if(bearing < 0)
 	  {

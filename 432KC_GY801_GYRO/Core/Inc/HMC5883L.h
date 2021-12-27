@@ -34,6 +34,6 @@ enum HMC5883L_regAddr
 
 void	Init_HMC5883L();
 uint8_t	HMC5883L_WhoAmI();
-double	HMC5883L_Read();
+double	HMC5883L_Read(COMDATA *C);
 
 #endif /* INC_HMC5883L_H_ */

@@ -8,6 +8,7 @@ C_SRCS += \
 ../Core/Src/ADXL345.c \
 ../Core/Src/BMP180.c \
 ../Core/Src/HMC5883L.c \
+../Core/Src/Kalman.c \
 ../Core/Src/L3G4200D.c \
 ../Core/Src/main.c \
 ../Core/Src/stm32l4xx_hal_msp.c \
@@ -20,6 +21,7 @@ OBJS += \
 ./Core/Src/ADXL345.o \
 ./Core/Src/BMP180.o \
 ./Core/Src/HMC5883L.o \
+./Core/Src/Kalman.o \
 ./Core/Src/L3G4200D.o \
 ./Core/Src/main.o \
 ./Core/Src/stm32l4xx_hal_msp.o \
@@ -32,6 +34,7 @@ C_DEPS += \
 ./Core/Src/ADXL345.d \
 ./Core/Src/BMP180.d \
 ./Core/Src/HMC5883L.d \
+./Core/Src/Kalman.d \
 ./Core/Src/L3G4200D.d \
 ./Core/Src/main.d \
 ./Core/Src/stm32l4xx_hal_msp.d \
@@ -48,7 +51,7 @@ Core/Src/%.o: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/ADXL345.d ./Core/Src/ADXL345.o ./Core/Src/BMP180.d ./Core/Src/BMP180.o ./Core/Src/HMC5883L.d ./Core/Src/HMC5883L.o ./Core/Src/L3G4200D.d ./Core/Src/L3G4200D.o ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/stm32l4xx_hal_msp.d ./Core/Src/stm32l4xx_hal_msp.o ./Core/Src/stm32l4xx_it.d ./Core/Src/stm32l4xx_it.o ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/system_stm32l4xx.d ./Core/Src/system_stm32l4xx.o
+	-$(RM) ./Core/Src/ADXL345.d ./Core/Src/ADXL345.o ./Core/Src/BMP180.d ./Core/Src/BMP180.o ./Core/Src/HMC5883L.d ./Core/Src/HMC5883L.o ./Core/Src/Kalman.d ./Core/Src/Kalman.o ./Core/Src/L3G4200D.d ./Core/Src/L3G4200D.o ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/stm32l4xx_hal_msp.d ./Core/Src/stm32l4xx_hal_msp.o ./Core/Src/stm32l4xx_it.d ./Core/Src/stm32l4xx_it.o ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/system_stm32l4xx.d ./Core/Src/system_stm32l4xx.o
 
 .PHONY: clean-Core-2f-Src
 

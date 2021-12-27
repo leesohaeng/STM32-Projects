@@ -1,6 +1,7 @@
 "./Core/Src/ADXL345.o"
 "./Core/Src/BMP180.o"
 "./Core/Src/HMC5883L.o"
+"./Core/Src/Kalman.o"
 "./Core/Src/L3G4200D.o"
 "./Core/Src/main.o"
 "./Core/Src/stm32l4xx_hal_msp.o"
